@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#e74c3c" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#b93d30" media="(prefers-color-scheme: dark)">
+    <title>Lotteria</title>
+    <link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-layout">
+        <main class="main-content">
+            <form id="setupForm" class="setup-card hidden" onsubmit="startLottery(event)">
+                <h1>Lotteria</h1>
+                <div class="setup-range">
+                    <label>Da <input type="number" id="rangeFromInput" value="1" step="1" required></label>
+                    <label>A <input type="number" id="rangeToInput" value="100" step="1" required></label>
+                </div>
+                <label>Numeri esclusi <input type="text" id="setupExcludedInput" placeholder="es. 13, 27, 40-45"></label>
+                <button type="submit" class="btn-extract">Inizia</button>
+            </form>
+            <section id="drumSection" class="drum-section hidden">
+                <div class="drum-canvas-wrapper">
+                    <canvas id="drumCanvas"></canvas>
+                </div>
+                <div class="drum-info">
+                    <span>Rimasti: <strong id="remainingCount"></strong> di <span id="totalCount"></span></span>
+                    <span id="nextPrize"></span>
+                </div>
+                <button id="extractBtn" onclick="extractNumber()" class="btn-extract">Estrai</button>
+            </section>
+        </main>
+        <aside class="sidebar">
+            <button onclick="clearAll()" class="btn btn--outline btn--full-width" style="margin-bottom: var(--space-16);">Reset</button>
+            <div class="history-section">
+                <h2>Storico Estrazioni</h2>
+                <div class="history-list" id="historyList"></div>
+            </div>
+            <h2>Premi</h2>
+            <div class="wins-list" id="prizesList"></div>
+            <div class="add-custom-win win-item">
+                <input type="text" id="prizeInput" placeholder="Aggiungi premio" class="form-control">
+                <button onclick="addPrize()" class="btn btn--secondary btn--sm">+</button>
+            </div>
+            <h2>Numeri esclusi</h2>
+            <div class="wins-list" id="excludedList"></div>
+            <div class="add-custom-win win-item">
+                <input type="text" id="excludeInput" placeholder="es. 13, 40-45" class="form-control">
+                <button onclick="excludeNumbers()" class="btn btn--secondary btn--sm">+</button>
+            </div>
+        </aside>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
